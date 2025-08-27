@@ -1,6 +1,6 @@
 {
-  "title": "آزمون اطلاعات عمومی — نمونه",
-  "language": "fa",
+  "title": "General Knowledge Quiz — Sample",
+  "language": "en",
   "shuffleQuestions": false,
   "timeLimitPerQuestion": null,
   "showHints": true,
@@ -8,74 +8,74 @@
     {
       "position": 1,
       "type": "multiple",
-      "text": "پایتخت فرانسه کدام است؟",
-      "options": ["پاریس", "لندن", "رم", "برلین"],
+      "text": "What is the capital of France?",
+      "options": ["Paris", "London", "Rome", "Berlin"],
       "answerIndex": 0,
-      "hint": "شهری که برج ایفل در آن قرار دارد."
+      "hint": "The city where the Eiffel Tower is located."
     },
     {
       "position": 2,
       "type": "contains",
-      "text": "نام سیارهٔ سوم از خورشید را بنویسید.",
-      "correctKeywords": ["زمین", "earth"],
-      "hint": "سیاره‌ای که ما روی آن زندگی می‌کنیم."
+      "text": "Write the name of the third planet from the Sun.",
+      "correctKeywords": ["Earth"],
+      "hint": "The planet we live on."
     },
     {
       "position": 3,
       "type": "exact",
-      "text": "بزرگ‌ترین قارهٔ زمین کدام است؟",
-      "answer": ["آسیا", "آسیأ"],
-      "hint": "بیشترین جمعیت را دارد."
+      "text": "Which is the largest continent on Earth?",
+      "answer": ["Asia"],
+      "hint": "It has the largest population."
     },
     {
       "position": 4,
       "type": "number",
-      "text": "تعداد قاره‌های کرهٔ زمین چند است؟ (یک عدد وارد کنید)",
+      "text": "How many continents are there on Earth? (Enter a number)",
       "answer": 7,
       "tolerance": 0,
-      "hint": "پاسخ یک عدد صحیح است."
+      "hint": "The answer is an integer."
     },
     {
       "position": 5,
       "type": "boolean",
-      "text": "آب در دمای صفر درجهٔ سانتی‌گراد (در فشار استاندارد) یخ می‌زند. درست یا نادرست؟",
+      "text": "Water freezes at 0°C (under standard pressure). True or False?",
       "answer": true,
-      "hint": "در شرایط معمولی بله."
+      "hint": "Under normal conditions, yes."
     },
     {
       "position": 6,
       "type": "regex",
-      "text": "سال آغاز انقلاب فرانسه را به صورت چهار رقمی وارد کنید.",
+      "text": "Enter the year the French Revolution started (4 digits).",
       "pattern": "^1789$",
-      "hint": "این رویداد در اواخر قرن هجدهم رخ داد."
+      "hint": "This event happened in the late 18th century."
     },
     {
       "position": 7,
       "type": "exact",
-      "text": "نماد شیمیایی عنصر اکسیژن چیست؟",
-      "answer": ["O", "o", "اکسیژن"],
-      "hint": "این نماد معمولاً یک حرفی است."
+      "text": "What is the chemical symbol for oxygen?",
+      "answer": ["O", "o", "Oxygen"],
+      "hint": "Usually a single letter."
     },
     {
       "position": 8,
       "type": "contains",
-      "text": "سریع‌ترین حیوان خشکی‌زی جهان کدام است؟ (نام را وارد کنید)",
-      "correctKeywords": ["چیتا", "یوز", "یوزپلنگ"],
-      "hint": "می‌تواند تا بیش از ۱۰۰ کیلومتر بر ساعت بدود."
+      "text": "What is the fastest land animal? (Enter the name)",
+      "correctKeywords": ["Cheetah"],
+      "hint": "It can run over 100 km/h."
     },
     {
       "position": 9,
       "type": "multiple",
-      "text": "کدام‌یک از موارد زیر یک عنصر شیمیایی نیست؟",
-      "options": ["هیدروژن", "طلا", "هوا", "کربن"],
+      "text": "Which of the following is NOT a chemical element?",
+      "options": ["Hydrogen", "Gold", "Air", "Carbon"],
       "answerIndex": 2,
-      "hint": "یکی از گزینه‌ها مخلوطی از چند گاز است."
+      "hint": "One option is a mixture of gases."
     },
     {
       "position": 10,
       "type": "exact",
-      "text": "نام خانوادگی مخترع تلفن چیست؟",
-      "answer": ["بل", "Bell", "بِل"],
+      "text": "What is the last name of the inventor of the telephone?",
+      "answer": ["Bell"],
       "hint": "Alexander ___"
     }
   ]

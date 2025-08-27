@@ -1,23 +1,23 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="en" dir="ltr">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>آزمون اطلاعات عمومی</title>
+  <title>Quiz</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <main class="app" role="main" aria-labelledby="app-title">
     <header class="topbar" role="banner">
       <div class="brand">
-        <h1 id="app-title">آزمون اطلاعات عمومی</h1>
-        <p class="subtitle">آسان، تمیز و آمادهٔ استفاده — سوال‌ها در فایل <code>config.json</code></p>
+        <h1 id="app-title">Normal Quiz Test</h1>
+        <p class="subtitle">Easy and usable — questions come from <code>config.json</code>.</p>
       </div>
 
       <div class="top-actions">
-        <button id="btn-load-config" class="btn ghost" title="بارگذاری کانفیگ (اختیاری)">بارگذاری کانفیگ</button>
+        <button id="btn-load-config" class="btn ghost" title="Upload config (optional)">Load Config</button>
         <input id="config-file-input" type="file" accept=".json" class="visually-hidden" aria-hidden="true">
-        <button id="btn-reset" class="btn ghost" title="بارگذاری پیش‌فرض">بازنشانی پیش‌فرض</button>
+        <button id="btn-reset" class="btn ghost" title="Reset to default">Reset to Default</button>
       </div>
     </header>
 
@@ -25,18 +25,18 @@
       <div class="quiz-card panel" role="application" aria-labelledby="quiz-title">
         <div class="quiz-head">
           <div class="meta">
-            <div id="status" class="status">آماده</div>
-            <div id="progress" class="progress">سوال <strong id="current">0</strong> از <strong id="total">0</strong></div>
+            <div id="status" class="status">Ready</div>
+            <div id="progress" class="progress">Question <strong id="current">0</strong> of <strong id="total">0</strong></div>
           </div>
           <div class="progress-bar" aria-hidden="true"><i id="progress-fill" style="width:0%"></i></div>
         </div>
 
         <div id="intro" class="intro">
-          <h2 id="quiz-title">آزمون آمادهٔ اجراست</h2>
-          <p class="muted">روی «شروع آزمون» کلیک کن. بعد از پایان می‌تونی نتایج رو دانلود یا بازبینی کنی.</p>
+          <h2 id="quiz-title">Quiz Ready to Start</h2>
+          <p class="muted">Click "Start Quiz". After finishing you can review and download your results.</p>
           <div class="controls">
-            <button id="start-btn" class="btn primary">شروع آزمون</button>
-            <button id="preview-btn" class="btn ghost">پیش‌نمایش سوال‌ها</button>
+            <button id="start-btn" class="btn primary">Start Quiz</button>
+            <button id="preview-btn" class="btn ghost">Preview Questions</button>
           </div>
         </div>
 
@@ -49,25 +49,25 @@
           <div id="input-area" class="input-area" aria-controls="q-text"></div>
 
           <div class="actions-row">
-            <button id="submit-btn" class="btn primary">ثبت پاسخ</button>
-            <button id="skip-btn" class="btn ghost">رد کن</button>
-            <button id="next-btn" class="btn ghost hidden">بعدی</button>
+            <button id="submit-btn" class="btn primary">Submit Answer</button>
+            <button id="skip-btn" class="btn ghost">Skip</button>
+            <button id="next-btn" class="btn ghost hidden">Next</button>
           </div>
 
           <div id="feedback" class="feedback" role="status" aria-live="polite"></div>
         </article>
 
         <article id="result-area" class="result-area hidden" aria-live="polite">
-          <h3>نتایج شما</h3>
+          <h3>Your Results</h3>
           <div class="result-summary">
             <div class="score" id="score-text">0 / 0</div>
             <div class="muted" id="score-details"></div>
           </div>
 
           <div class="controls" style="margin-top:12px;">
-            <button id="download-json" class="btn primary">دانلود JSON</button>
-            <button id="download-csv" class="btn ghost">دانلود CSV</button>
-            <button id="restart-btn" class="btn ghost">شروع مجدد</button>
+            <button id="download-json" class="btn primary">Download JSON</button>
+            <button id="download-csv" class="btn ghost">Download CSV</button>
+            <button id="restart-btn" class="btn ghost">Restart</button>
           </div>
 
           <div id="review-list" class="review-list" style="margin-top:14px;"></div>
@@ -76,7 +76,7 @@
     </section>
 
     <footer class="footer muted" style="margin-top:18px;text-align:center;color:#6b7280;">
-     
+      <!-- optional footer -->
     </footer>
   </main>
 

@@ -1,11 +1,11 @@
-/* style.css — مینیمال، حرفه‌ای، RTL */
+/* style.css — minimal, professional, LTR version */
 :root {
   --bg: linear-gradient(135deg, #a1c4fd, #c2e9fb);
   --card: #ffffff;
   --muted: #6c757d;
   --text: #1e293b;
-  --accent-start: #10b981; /* سبز */
-  --accent-end: #0ea5e9;   /* آبی */
+  --accent-start: #10b981; /* green */
+  --accent-end: #0ea5e9;   /* blue */
   --danger: #ef4444;
   --success: #10b981;
   --glass: rgba(30,41,59,0.04);
@@ -21,7 +21,7 @@ html, body {
   margin: 0;
   background: var(--bg);
   font-family: "Vazirmatn", system-ui, -apple-system, "Segoe UI", Roboto, Arial;
-  direction: rtl;
+  direction: ltr;
   color: var(--text);
   -webkit-font-smoothing: antialiased;
 }
@@ -89,7 +89,7 @@ html, body {
   gap: 10px;
 }
 
-/* افکت نئون برای حالت hover و active پایه */
+/* hover/focus effects */
 .btn:hover { 
   transform: translateY(-2px); 
   box-shadow: 0 8px 20px rgba(0,0,0,0.08); 
@@ -100,11 +100,11 @@ html, body {
   box-shadow: 0 0 0 4px rgba(14,165,164,0.15); 
 }
 
-/* دکمه اصلی با نئون سبز-آبی */
+/* primary button using defined accent variables */
 .btn.primary {
-  background: linear-gradient(180deg, var(--accent), var(--accent-700));
+  background: linear-gradient(180deg, var(--accent-start), var(--accent-end));
   color: #042727;
-  border: 2px solid #0ff; /* خط دور نئون */
+  border: 2px solid #0ff; /* neon outline */
   transition: all 0.3s ease;
 }
 
@@ -123,7 +123,7 @@ html, body {
   box-shadow: 0 0 10px #0ff, 0 0 20px #0ff, 0 0 30px #0ea5a4, 0 0 40px #0ea5a4;
 }
 
-/* دکمه شفاف یا Ghost */
+/* ghost button */
 .btn.ghost {
   background: transparent;
   color: var(--muted);
@@ -139,8 +139,8 @@ html, body {
 
 /* question */
 .question-area { padding: 14px; border-radius: 12px; }
-.question-text { font-size: 1.1rem; margin: 8px 0; line-height: 1.7; text-align: right; }
-.hint { font-size: 0.95rem; color: var(--muted); margin-bottom: 10px; text-align: right; }
+.question-text { font-size: 1.1rem; margin: 8px 0; line-height: 1.7; text-align: left; }
+.hint { font-size: 0.95rem; color: var(--muted); margin-bottom: 10px; text-align: left; }
 .input-area { margin-top: 10px; }
 input[type="text"], input[type="number"], textarea {
   width: 100%;
@@ -185,7 +185,7 @@ input:focus, textarea:focus {
   border-radius: 6px;
   border: 2px solid rgba(30,41,59,0.06);
   display: inline-block;
-  margin-left: 12px;
+  margin-right: 12px; /* moved from left to right for LTR */
 }
 .choice.selected::after { background: #fff; border-color: rgba(255,255,255,0.9); }
 
@@ -215,4 +215,75 @@ input:focus, textarea:focus {
   .topbar { flex-direction: column; align-items: flex-start; gap: 10px; }
   .quiz-card { padding: 16px; }
   .choice { padding: 12px 14px; }
+}
+/* Replace previous .choice::after and .choice.selected::after with this block */
+
+/* small square indicator on the right (for LTR, uses margin-right) */
+.choice::after {
+  content: "";
+  width: 20px;
+  height: 20px;
+  border-radius: 6px;
+  border: 2px solid rgba(30,41,59,0.12);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 12px; /* indicator on the right for LTR */
+  font-size: 14px;
+  color: transparent;            /* icon hidden by default */
+  background: transparent;
+  transition: all 220ms ease;
+  box-shadow: none;
+}
+
+/* when user selects (interaction) — show white check on accent */
+.choice.selected {
+  background: linear-gradient(135deg, var(--accent-start), var(--accent-end));
+  color: #fff;
+  border: none;
+  font-weight: 800;
+}
+
+/* selected state: put a white check mark inside the square */
+.choice.selected::after {
+  content: "✔";
+  color: #0a1f1d;               /* dark color for the check (contrasts nicer on white) */
+  background: #ffffff;
+  border-color: rgba(255,255,255,0.9);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* result states: correct / wrong */
+.choice.correct {
+  background: linear-gradient(135deg, rgba(16,185,129,0.15), rgba(14,165,164,0.06));
+  color: #063126;
+  border: 2px solid rgba(16,185,129,0.12);
+}
+.choice.correct::after {
+  content: "✔";
+  color: #063126;
+  background: #d6f9ec;
+  border-color: rgba(16,185,129,0.25);
+  box-shadow: 0 6px 18px rgba(16,185,129,0.06);
+}
+
+/* wrong answer style */
+.choice.wrong {
+  background: linear-gradient(135deg, rgba(239,68,68,0.06), rgba(138, 83, 83, 0.02));
+  color: #7b1212;
+  border: 2px solid rgba(239,68,68,0.08);
+}
+.choice.wrong::after {
+  content: "✕";
+  color: #7b1212;
+  background: #ffecec;
+  border-color: rgba(239,68,68,0.12);
+  box-shadow: 0 6px 18px rgba(239,68,68,0.04);
+}
+
+/* small polish: ensure icon always centered */
+.choice::after, .choice.selected::after, .choice.correct::after, .choice.wrong::after {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }

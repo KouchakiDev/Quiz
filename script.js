@@ -64,21 +64,74 @@ async function loadConfig(path = DEFAULT_CONFIG){
 }
 
 /* fallback config */
-function getFallbackConfig(){
+function getFallbackConfig() {
   return {
-    title: "آزمون پیش‌فرض",
+    title: "Default Quiz",
     shuffleQuestions: false,
     questions: [
-      {"position":1,"type":"multiple","text":"پایتخت ایران کدام است؟","options":["تهران","اصفهان","شیراز","تبریز"],"answerIndex":0},
-      {"position":2,"type":"contains","text":"نام سیارهٔ سوم از خورشید چیست؟","correctKeywords":["زمین","earth"]},
-      {"position":3,"type":"exact","text":"بزرگ‌ترین قارهٔ زمین کدام است؟","answer":["آسیا"]},
-      {"position":4,"type":"number","text":"تعداد قاره‌های زمین چند است؟","answer":7,"tolerance":0},
-      {"position":5,"type":"boolean","text":"آب در صفر درجهٔ سانتیگراد یخ می‌زند؟","answer":true},
-      {"position":6,"type":"regex","text":"سال آغاز انقلاب فرانسه را وارد کنید (4 رقم)","pattern":"^1789$"},
-      {"position":7,"type":"exact","text":"نماد شیمیایی اکسیژن چیست؟","answer":["O","o","اکسیژن"]},
-      {"position":8,"type":"contains","text":"سریع‌ترین حیوان خشکی‌زی چیست؟","correctKeywords":["چیتا","یوز","یوزپلنگ"]},
-      {"position":9,"type":"multiple","text":"کدام یک عنصر نیست؟","options":["هیدروژن","طلا","هوا","کربن"],"answerIndex":2},
-      {"position":10,"type":"exact","text":"نام خانوادگی مخترع تلفن چیست؟","answer":["بل","Bell","بِل"]}
+      {
+        position: 1,
+        type: "multiple",
+        text: "What is the capital of Iran?",
+        options: ["Tehran", "Isfahan", "Shiraz", "Tabriz"],
+        answerIndex: 0
+      },
+      {
+        position: 2,
+        type: "contains",
+        text: "What is the third planet from the Sun?",
+        correctKeywords: ["Earth"]
+      },
+      {
+        position: 3,
+        type: "exact",
+        text: "Which is the largest continent on Earth?",
+        answer: ["Asia"]
+      },
+      {
+        position: 4,
+        type: "number",
+        text: "How many continents are there on Earth?",
+        answer: 7,
+        tolerance: 0
+      },
+      {
+        position: 5,
+        type: "boolean",
+        text: "Water freezes at 0°C. True or False?",
+        answer: true
+      },
+      {
+        position: 6,
+        type: "regex",
+        text: "Enter the year the French Revolution started (4 digits)",
+        pattern: "^1789$"
+      },
+      {
+        position: 7,
+        type: "exact",
+        text: "What is the chemical symbol for oxygen?",
+        answer: ["O", "o", "Oxygen"]
+      },
+      {
+        position: 8,
+        type: "contains",
+        text: "What is the fastest land animal?",
+        correctKeywords: ["Cheetah"]
+      },
+      {
+        position: 9,
+        type: "multiple",
+        text: "Which of the following is NOT a chemical element?",
+        options: ["Hydrogen", "Gold", "Air", "Carbon"],
+        answerIndex: 2
+      },
+      {
+        position: 10,
+        type: "exact",
+        text: "What is the last name of the inventor of the telephone?",
+        answer: ["Bell"]
+      }
     ]
   };
 }
@@ -103,7 +156,7 @@ function initFromConfig(loaded){
   totalSpan && (totalSpan.innerText = questions.length);
   currentSpan && (currentSpan.innerText = 0);
   updateProgress();
-  setStatus('آماده');
+  setStatus('Ready');
 }
 
 /* UI helpers */
@@ -119,13 +172,13 @@ function updateProgress(){
 
 /* start quiz */
 function startQuiz(){
-  if (!questions || !questions.length) { alert('سوالی تعریف نشده — لطفاً فایل config.json را اضافه کنید یا از پیش‌فرض استفاده کنید.'); return; }
+  if (!questions || !questions.length) { alert("Question not defined — please add a config.json file or use the default."); return; }
   hide(intro);
   show(questionArea);
   currentIndex = 0;
   results = [];
   renderQuestion();
-  setStatus('در حال آزمون');
+  setStatus('in quiz');
 }
 
 /* render question */
@@ -133,7 +186,7 @@ function renderQuestion(){
   updateProgress();
   const q = questions[currentIndex];
   if (!q) return;
-  qText && (qText.innerText = q.text || '(بدون متن)');
+  qText && (qText.innerText = q.text || '(no text )');
   qHint && (qHint.innerText = q.hint || '');
   qHint && (qHint.style.display = q.hint ? 'block' : 'none');
   feedbackEl && (feedbackEl.innerText = '');
@@ -155,18 +208,18 @@ function renderQuestion(){
     });
     inputArea.appendChild(list);
   } else if (q.type === 'number'){
-    const inp = document.createElement('input'); inp.type = 'number'; inp.id = 'answer-input'; inp.placeholder = 'یک عدد وارد کنید';
+    const inp = document.createElement('input'); inp.type = 'number'; inp.id = 'answer-input'; inp.placeholder = 'input a number';
     inputArea.appendChild(inp); setTimeout(()=> inp.focus(), 120);
   } else if (q.type === 'boolean'){
     const wrapper = document.createElement('div'); wrapper.className = 'choice-list';
-    ['درست','نادرست'].forEach(label=>{
+    ['correct','incorrect'].forEach(label=>{
       const b = document.createElement('button'); b.type='button'; b.className='choice'; b.innerText = label;
       b.addEventListener('click', ()=> { wrapper.querySelectorAll('.choice').forEach(c=> c.classList.remove('selected')); b.classList.add('selected'); });
       wrapper.appendChild(b);
     });
     inputArea.appendChild(wrapper);
   } else {
-    const inp = document.createElement('input'); inp.type='text'; inp.id='answer-input'; inp.placeholder='پاسخ را بنویسید...';
+    const inp = document.createElement('input'); inp.type='text'; inp.id='answer-input'; inp.placeholder='write the answer ...';
     inputArea.appendChild(inp); setTimeout(()=> inp.focus(), 120);
   }
 
@@ -226,9 +279,9 @@ function readAnswer(q){
 function handleSubmit(){
   const q = questions[currentIndex];
   const res = readAnswer(q);
-  if (res.given === null){ feedbackEl.innerText = 'پاسخ وارد نشده — لطفاً پاسخ دهید یا از «رد کن» استفاده کنید.'; return; }
+  if (res.given === null){ feedbackEl.innerText = ' no answer please write answer or reject.'; return; }
   results.push({position: q.position || (currentIndex+1), question: q.text, given: res.given, correct: !!res.ok});
-  feedbackEl.innerText = res.ok ? 'درست است' : 'پاسخ صحیح نیست';
+  feedbackEl.innerText = res.ok ? ' correct' : 'answer incorrect  ';
   show(nextBtn); hide(submitBtn);
   setTimeout(()=> handleNext(), 650);
 }
@@ -250,9 +303,9 @@ function finishQuiz(){
   const total = questions.length;
   const correct = results.filter(r=>r.correct).length;
   scoreText && (scoreText.innerText = `${correct} / ${total}`);
-  scoreDetails && (scoreDetails.innerText = `درصد: ${Math.round((correct/total)*100)}% — سوال‌های درست: ${correct}`);
+  scoreDetails && (scoreDetails.innerText = `percent: ${Math.round((correct/total)*100)}% — the correct answers : ${correct}`);
   buildReview();
-  setStatus('پایان آزمون');
+  setStatus('finish Quiz');
 }
 
 /* review & download */
@@ -261,7 +314,7 @@ function buildReview(){
   reviewList.innerHTML = '';
   results.forEach((r,i)=>{
     const div = document.createElement('div'); div.className = 'panel';
-    div.innerHTML = `<strong>سوال ${i+1}:</strong> ${escapeHtml(r.question)}<div class="muted">پاسخ شما: <strong>${escapeHtml(r.given === null ? '(رد شده)' : String(r.given))}</strong> — ${r.correct ? '<span style="color:var(--success)">درست</span>' : '<span style="color:var(--danger)">نادرست</span>'}</div>`;
+    div.innerHTML = `<strong>Question ${i+1}:</strong> ${escapeHtml(r.question)}<div class="muted">your answer: <strong>${escapeHtml(r.given === null ? '(Rejected )' : String(r.given))}</strong> — ${r.correct ? '<span style="color:var(--success)">Correct</span>' : '<span style="color:var(--danger)">incorrect</span>'}</div>`;
     reviewList.appendChild(div);
   });
 }
@@ -279,7 +332,7 @@ function downloadResultsCSV(){
 /* preview (simple alert) */
 function previewQuestions(){
   const list = questions.map(q => `${q.position||'?'} — ${q.text}`).join('\n\n');
-  alert(list || 'سوالی موجود نیست.');
+  alert(list || 'No questions  .');
 }
 
 /* upload config */
@@ -291,9 +344,9 @@ function handleConfigFile(ev){
     try {
       const parsed = JSON.parse(e.target.result);
       initFromConfig(parsed);
-      alert('کانفیگ بارگذاری شد.');
+      alert(' Config Uploaded.');
     } catch (err) {
-      alert('فایل JSON نامعتبر است.');
+      alert('Json File is not usable   .');
     }
   };
   reader.readAsText(f);
